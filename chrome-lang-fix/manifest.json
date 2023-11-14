@@ -1,0 +1,31 @@
+{
+  "manifest_version": 3,
+  "name": "Incognito Google Language",
+  "description": "When a new window is opened in incognito mode, it will use regional settings based on your IP address instead of the default language provided by the user in chrome:settings. This extension is useful for people who live in a country where the official language is different from the language they use in their daily life. When starting a new incognito session, the extension will open a new inactive tab, navigate to google.com, and navigates to the link provided to set the language preference. This roundabout way is needed in order to set an http only cookie controlled by Google, which is behind a signed URL based on another generated cookie. There probably is a better way to do this, but for now this will have to do. Note, this extension is only useful while incognito, so you should \"Allow in Incognito\" from the extension settings",
+  "version": "1.0",
+  "permissions": [
+    "tabs",
+    "activeTab"
+  ],
+  "host_permissions": [
+    "https://www.google.com/"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://www.google.com/*"
+      ],
+      "js": [
+        "content.js"
+      ]
+    }
+  ],
+  "icons": {
+    "16": "icon16.png",
+    "48": "icon48.png",
+    "128": "icon128.png"
+  }
+}
